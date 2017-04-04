@@ -54,33 +54,28 @@ for i in urls_queue:
 	try:
 		#find relevant lines and add them to lists
 		company_name = table.find('span', attrs={"id":"ctl00_cpContent_lbl_CompanyName"})
-		A.append(company_name.string)
+		if company_name != None:
+			A.append(company_name.string)
+		else:
+			A.append("NIL")
 
 		telephone = table.find('span', attrs={"id":"ctl00_cpContent_lbl_Telephone"})
-		B.append(telephone.string)
+		if telephone != None:
+			B.append(telephone.string)
+		else:
+			B.append("NIL")
 
 		email = table.find('span', attrs={"id":"ctl00_cpContent_lbl_Email"})
-		C.append(email.string)
+		if email != None:
+			C.append(email.string)
+		else:
+			C.append("NIL")		
+
 
 	except Exception as e:
 		print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e), e)
 		print (format(sys.exc_info()[-1].tb_lineno))
 
-		#if error message returns on line XX:
-		if format(sys.exc_info()[-1].tb_lineno) == "55":
-			A.append("NIL")
-			print ("A")
-		elif format(sys.exc_info()[-1].tb_lineno) == "58":
-			B.append("NIL")
-			print ("B")
-		elif format(sys.exc_info()[-1].tb_lineno) == "61":
-			C.append("NIL")
-			print ("C")
-		else:
-			
-			#exception handling is wrong
-			print ("wrong code!")
-		continue	
 
 print (len(A))
 print (len(B))
@@ -109,6 +104,3 @@ print (datetime.now()- start_time)
 
 
 
-
-
-#for table scrapping https://www.analyticsvidhya.com/blog/2015/10/beginner-guide-web-scraping-beautiful-soup-python/
