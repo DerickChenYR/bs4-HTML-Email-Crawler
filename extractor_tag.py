@@ -6,7 +6,7 @@ import re
 from bs4 import BeautifulSoup, SoupStrainer
 from datetime import datetime
 import csv
-import sys
+
 
 
 start_time = datetime.now()
@@ -14,6 +14,7 @@ start_time = datetime.now()
 urls_queue = set()
 n = 0
 
+#example website
 url = "http://www.iccmalaysia.org.my/Membership-@-Member_List.aspx"
 
 component = urlparse(url)
@@ -24,8 +25,7 @@ con = urllib.request.urlopen(req)
 
 soup = BeautifulSoup(con, 'html.parser')
 
-#how to crawl the other pages with data on the table on the same html link????
-
+#find all links in url
 for a in soup.find_all('a', href=True):
 
 	#convert all links to absolute url
@@ -37,6 +37,7 @@ for a in soup.find_all('a', href=True):
 
 print (urls_queue)
 
+#lists to store variables 
 A= []
 B= []
 C= []
@@ -76,14 +77,14 @@ for i in urls_queue:
 		print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e), e)
 		print (format(sys.exc_info()[-1].tb_lineno))
 
-
+		
+#check if lists have same number of entries to ensure they correctly correspond to sister cells in csv file
 print (len(A))
 print (len(B))
 print (len(C))
 
-out = [[ ] for x in range(len(A)+1)]
-
-
+out = [[ ] for x in
+       range(len(A)+1)]
 
 while n < len(A):
 
@@ -92,8 +93,8 @@ while n < len(A):
 	out[n].append(C[n])
 	n += 1
 
-
-
+	
+#write to CSV
 with open ("ICC Malaysia Contacts.csv", "a", newline="") as result_file:
 	wr = csv.writer(result_file, dialect = "excel" )
 	for i in out:
