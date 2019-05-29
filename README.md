@@ -12,7 +12,7 @@ A simple html crawler script in Python that registers all emails on the given HT
  
 ## Built With
 BeautifulSoup 4
-urllib
+Requests
  
 ## Author(s)
  Derick Chen Yuran - [LinkedIn](https://www.linkedin.com/in/derick-chen-a672866b/)
